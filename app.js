@@ -19,6 +19,7 @@ const logoutConfirm = document.getElementById("logoutConfirm");
 const logoutCancel = document.getElementById("logoutCancel");
 const splash = document.getElementById("splash");
 const menuToggle = document.getElementById("menuToggle");
+const sidebarOverlay = document.getElementById("sidebarOverlay");
 
 const views = Array.from(document.querySelectorAll(".view"));
 const navLinks = Array.from(document.querySelectorAll(".nav-link"));
@@ -619,5 +620,11 @@ if (reportRows.length) {
 if (menuToggle) {
   menuToggle.addEventListener("click", () => {
     document.body.classList.toggle("mobile-menu-open");
+  });
+}
+
+if (sidebarOverlay) {
+  sidebarOverlay.addEventListener("click", () => {
+    document.body.classList.remove("mobile-menu-open");
   });
 }
