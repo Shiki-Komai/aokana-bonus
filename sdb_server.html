@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SDB SERVER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="splash hide" id="splash">
+    <img src="assets/images/SPECTRAL DEFENSE BUREAU_ロゴ.png" alt="SDB Logo" class="splash-logo" />
+    <div class="splash-text">SPECTRAL DEFENSE BUREAU</div>
+  </div>
+
+  <main class="page login-grid" id="loginView" aria-labelledby="login-title">
+    <section class="login-card">
+      <div class="brand">
+        <div class="brand-badge" aria-hidden="true">SDB</div>
+        <div>
+          <h1 id="login-title">SDB SERVER</h1>
+          <p>Spectral Defence Bureau / 裏五山</p>
+        </div>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="authId">認証ID</label>
+          <input id="authId" name="authId" type="text" autocomplete="username" aria-label="認証ID" />
+        </div>
+        <div class="field">
+          <label for="password">パスワード</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" aria-label="パスワード" />
+        </div>
+        <button type="submit" class="primary-btn" aria-label="ログイン">ログイン</button>
+        <div class="error" id="errorMessage" role="alert"></div>
+      </form>
+    </section>
+  </main>
+
+  <div class="dashboard hidden" id="appShell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-badge" aria-hidden="true">SDB</div>
+        <div>
+          <h1>SDB Console</h1>
+          <p>Clearance Dashboard</p>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-link active" data-view="dashboard">ダッシュボード</button>
+        <button class="nav-link" data-view="reports">レポート</button>
+        <button class="nav-link" data-view="missions">位階参照</button>
+        <button class="nav-link" data-view="members">僧兵一覧</button>
+        <button class="nav-link" data-view="settings">申請書一覧</button>
+        <button class="nav-link" data-view="manual">業務マニュアル</button>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="header">
+        <div>
+          <div class="user" id="userName">SDB_User</div>
+        </div>
+        <button class="logout" id="logoutBtn" aria-label="ログアウト">ログアウト</button>
+      </header>
+
+      <section class="content">
+        <section class="view" id="view-dashboard">
+          <div class="grid-3">
+            <div class="card">
+              <h3>クリアランス</h3>
+              <div class="clearance">
+                <div>Current Status</div>
+                <div class="level" id="accessLevelText">ACCESS LEVEL 2</div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>最新レポート</h3>
+              <div class="latest-list">
+                <button class="latest-item" data-report-id="SDB-IR-2041">
+                  <span class="latest-title">瞋恚接触事件調査報告：六甲山</span>
+                  <span class="latest-time">2026-04-24 19:55</span>
+                </button>
+                <button class="latest-item" data-report-id="SDB-IR-1123">
+                  <span class="latest-title">スペクトル残留反応</span>
+                  <span class="latest-time">2026-03-11 07:40</span>
+                </button>
+                <button class="latest-item" data-report-id="SDB-IR-8872">
+                  <span class="latest-title">鬼姫往生報告：御嶽山</span>
+                  <span class="latest-time">2026-04-17 23:03</span>
+                </button>
+              </div>
+            </div>
+            <div class="card">
+              <h3>本日の業務連絡</h3>
+              <div class="notice-list">
+                <button class="notice-item" data-title="To：法具開発研究部全職員" data-body="5月1日(水)開催の技術カンファレンスに出席される方は、本日18:00 までに申請書一覧より必要書類を取得し、記入の上ご提出ください。">
+                  <span class="notice-title">To：法具開発研究部全職員</span>
+                  <span class="latest-time">2026-04-30 13:06</span>
+                </button>
+                <button class="notice-item" data-title="To：監査班各位" data-body="次回の監査用チェックリストは 16:30 に配布予定です。">
+                  <span class="notice-title">To：監査班各位</span>
+                  <span class="latest-time">2026-04-30 09:11</span>
+                </button>
+                <button class="notice-item" data-title="To：月読雫、日向鳴、職員各位" data-body="4月17日(金)に作成いただいた管理ID[SDB-IR-8872]の件につきまして、報告書が依然提出されていません。早急に報告書の提出をお願いいたします。また、概要の記載についても、指摘事項の修正を速やかに行ってください。&#10;職員は月読雫、日向鳴のどちらかを見かけた場合、至急センターにご連絡ください。">
+                  <span class="notice-title">To：月読雫、日向鳴、職員各位</span>
+                  <span class="latest-time">2026-04-30 09:00</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>最近のアクセスログ</h3>
+            <div class="log-list">
+              <div class="log-item"><span>09:42:12</span><span>Login verified</span></div>
+              <div class="log-item"><span>09:45:03</span><span>Asset scan: Delta-3</span></div>
+              <div class="log-item"><span>09:47:19</span><span>Report accessed: SDB-IR-2041</span></div>
+              <div class="log-item"><span>09:52:48</span><span>Inquiry routing</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view hidden" id="view-reports">
+          <div class="report-wrap">
+            <div class="card">
+              <h3>レポート一覧</h3>
+              <div class="table-wrap">
+                <table class="report-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>タイトル</th>
+                      <th>ステータス</th>
+                      <th>機密レベル</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="report-row" data-id="SDB-IR-2041" data-level="2" data-title="瞋恚接触事件調査報告：六甲山" data-status="Archived" data-summary="民間人と三毒『黒豹/瞋恚』との接触事件について" data-body="証言より出没個体は『黒豹/瞋恚(正三位)』と推定されるが、明確な痕跡は発見できず">
+                      <td>SDB-IR-2041</td>
+                      <td>瞋恚接触事件調査報告：六甲山</td>
+                      <td>Archived</td>
+                      <td>Level 2</td>
+                    </tr>
+                    <tr class="report-row" data-id="SDB-IR-1123" data-level="3" data-title="スペクトル残留反応" data-status="Active" data-summary="残留反応の解析と対応計画。" data-body="残留反応は Level 3 以上の承認が必要。計測点は <span class='redact'>REDACTED</span>。">
+                      <td>SDB-IR-1123</td>
+                      <td>スペクトル残留反応</td>
+                      <td>Active</td>
+                      <td>Level 3</td>
+                    </tr>
+                    <tr class="report-row" data-id="SDB-IR-8872" data-level="2" data-title="鬼姫往生報告：御嶽山" data-status="Archived" data-summary="御嶽山に出没した死霊の記録総括" data-body="月読雫の活躍により、御嶽山で確認された死霊『鬼姫(推定位階従三位)』は往生を遂げました。すばらしい、流石です。The Greatest Woman is her. Very God. Sorry, Very good. Thank you">
+                      <td>SDB-IR-8872</td>
+                      <td>鬼姫往生報告：御嶽山</td>
+                      <td>Archived</td>
+                      <td>Level 2</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="report-action">
+              <button class="secondary-btn small-btn" id="createReportBtn" aria-label="作成">作成</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="view hidden" id="view-report-detail">
+          <div class="card">
+            <div class="detail-header">
+              <div>
+                <h3>レポート詳細</h3>
+              </div>
+              <button class="secondary-btn" id="backToReports" aria-label="一覧に戻る">一覧に戻る</button>
+            </div>
+            <div class="report-viewer" id="reportViewer">
+              <div class="report-tag" id="reportTag">CLEARANCE L2</div>
+              <div class="report-title-row">
+                <div class="report-title" id="reportTitle">SDB-IR-2041</div>
+                <div class="report-download" id="reportDownloadArea"></div>
+              </div>
+              <div class="report-placeholder" id="reportMeta">Status: Archived</div>
+              <div class="report-placeholder" id="reportSummary">民間人と三毒『黒豹/瞋恚』との接触事件について</div>
+              <div class="report-body" id="reportBody"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view hidden" id="view-report-create">
+          <div class="card">
+            <h3>レポート作成</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="reportTitleInput">タイトル：</label>
+                <input id="reportTitleInput" type="text" aria-label="レポートタイトル" />
+              </div>
+              <div class="field">
+                <label for="reportDate">日時：</label>
+                <input id="reportDate" type="text" aria-label="レポート日時" placeholder="yyyy-mm-dd hh:mm" />
+              </div>
+              <div class="field full">
+                <label for="reportBodyInput">概要：</label>
+                <textarea id="reportBodyInput" rows="8" aria-label="レポート本文"></textarea>
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button class="secondary-btn" id="saveReport" aria-label="確認">確認</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="view hidden" id="view-notice-detail">
+          <div class="card">
+            <div class="detail-header">
+              <div>
+                <h3>業務連絡 詳細</h3>
+                <div class="footer-note">通知内容を表示します。</div>
+              </div>
+              <button class="secondary-btn" id="backToDashboard" aria-label="戻る">戻る</button>
+            </div>
+            <div class="report-viewer">
+              <div class="report-title" id="noticeTitle">To：法具開発研究部全職員</div>
+              <div class="report-body" id="noticeBody"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view hidden" id="view-missions">
+          <div class="card">
+            <h3>位階参照</h3>
+            <div class="report-placeholder">アクセス権限が不足しています。</div>
+          </div>
+        </section>
+
+        <section class="view hidden" id="view-members">
+          <div class="card admin-card">
+            <h3>統括管理人</h3>
+            <div class="admin-name">志村泡鳴</div>
+            <div class="admin-sub">統括管理室 / 最高統制</div>
+          </div>
+          <div class="card">
+            <h3>僧兵一覧</h3>
+            <div class="table-wrap">
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th>メンバー</th>
+                    <th>担当区域</th>
+                    <th>ステータス</th>
+                    <th>助手</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><button class="link-button member-link" data-name="談々森海蘊">談々森海蘊</button></td>
+                    <td>北海道</td>
+                    <td>オフライン</td>
+                    <td>オスカー・ダ・オルトリンデ</td>
+                  </tr>
+                  <tr>
+                    <td><button class="link-button member-link" data-name="月読雫">月読雫</button></td>
+                    <td>東北地方</td>
+                    <td>オフライン</td>
+                    <td>日向鳴</td>
+                  </tr>
+                  <tr>
+                    <td><button class="link-button member-link" data-name="伊那守常葉">伊那守常葉</button></td>
+                    <td>関東圏</td>
+                    <td>オフライン</td>
+                    <td>二条由紀</td>
+                  </tr>
+                  <tr>
+                    <td><button class="link-button member-link" data-name="四迷穹">四迷穹</button></td>
+                    <td>中部地方</td>
+                    <td>オフライン</td>
+                    <td>日馬刻人</td>
+                  </tr>
+                  <tr>
+                    <td><button class="link-button member-link" data-name="四谷燈子">四谷燈子</button></td>
+                    <td>近畿地方</td>
+                    <td>オフライン</td>
+                    <td>なし</td>
+                  </tr>
+                  <tr>
+                    <td><button class="link-button member-link" data-name="九字景戒">九字景戒</button></td>
+                    <td>中国地方</td>
+                    <td>オフライン</td>
+                    <td>鏑木海</td>
+                  </tr>
+                  <tr>
+                    <td><button class="link-button member-link" data-name="羅彦霖">羅彦霖</button></td>
+                    <td>四国</td>
+                    <td>オフライン</td>
+                    <td>なし</td>
+                  </tr>
+                  <tr>
+                    <td><button class="link-button member-link" data-name="後藤俊成">後藤俊成</button></td>
+                    <td>九州・沖縄</td>
+                    <td>オフライン</td>
+                    <td>新垣海源</td>
+                  </tr>
+                  <tr>
+                    <td><button class="link-button member-link" data-name="迦楼羅">迦楼羅</button></td>
+                    <td>？？？</td>
+                    <td>オフライン</td>
+                    <td>なし</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="view hidden" id="view-profile">
+          <div class="card profile-card">
+            <div class="detail-header">
+              <div>
+                <h3>プロフィール</h3>
+                <div class="footer-note">SDB Personnel Record</div>
+              </div>
+              <button class="secondary-btn" id="backToMembers" aria-label="僧兵一覧に戻る">一覧に戻る</button>
+            </div>
+            <div class="profile-grid">
+              <div class="profile-block">
+                <h4>基本情報</h4>
+                <dl class="profile-list">
+                  <div><dt>名前</dt><dd>伊那守常葉</dd></div>
+                  <div><dt>身長</dt><dd>176cm</dd></div>
+                  <div><dt>体重</dt><dd>68kg</dd></div>
+                  <div><dt>年齢</dt><dd>27歳</dd></div>
+                  <div><dt>性別</dt><dd>男性</dd></div>
+                  <div><dt>生年月日</dt><dd>1999年2月16日</dd></div>
+                  <div><dt>現住所</dt><dd><span class="redact-inline">REDACTED</span></dd></div>
+                  <div><dt>個人連絡先</dt><dd><span class="redact-inline">REDACTED</span></dd></div>
+                </dl>
+              </div>
+              <div class="profile-block">
+                <h4>現職</h4>
+                <ul class="profile-lines">
+                  <li>R正大学 仏教学部仏教学科 助教</li>
+                  <li>N本印度仏教学会 評議員</li>
+                  <li>一般社団法人仏教総会 技術顧問</li>
+                  <li>裏五山（SDB） 僧兵</li>
+                </ul>
+              </div>
+              <div class="profile-block full">
+                <h4>経歴</h4>
+                <p class="profile-text">
+                  新潟県刈羽郡御舟村出身(現在廃村)。幼少期、震度7の地震に被災し、両親と弟を亡くして震災孤児となる。その後、当時の日蓮宗宗務総長の養子となり、10歳にして得度する。幼くして法華経全文を暗記するなどずば抜けた才能を発揮し、12歳にして日蓮宗特別研究機関、通称白蓮院の会員となる。ND高等学校卒業後、T京大学に進学。優秀な成績で文学部インド哲学仏教専修課程を卒業すると、同大学大学院の博士課程前期（修士）に進んだ。在籍中、バナーラス・Hンドゥー大学に留学。帰国後に発表した論文がN本印度仏教学会賞を受賞した。修士号取得のタイミングで権大僧都の位階に昇進。しかし、間も無く辞任して宗門を離れる。その後、同大学院博士課程後期に進み、在籍中に発表した論文がG士院賞を受賞した。それまでの功績が認められ、史上最年少でN本印度仏教学会の評議員に就任した。博士課程在籍中、僧兵の募集が実施され、統括管理人である志村泡鳴の推薦を受けて対死霊戦闘訓練課程に参加、最終選抜を経て僧兵に就任する。担当区域は関東圏。博士号取得後、R正大学学長白富駿の推薦を受けて同大学仏教学部仏教学科の助教に就任。
+                </p>
+              </div>
+              <div class="profile-block">
+                <h4>実績</h4>
+                <p class="profile-text"><span class="redact-inline">REDACTED</span></p>
+              </div>
+              <div class="profile-block">
+                <h4>専用法具</h4>
+                <p class="profile-text"><span class="redact-inline">REDACTED</span></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view hidden" id="view-application">
+          <div class="card">
+            <h3>閲覧許可申請書</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="supervisorName">上司の名前：</label>
+                <input id="supervisorName" type="text" aria-label="上司の名前" />
+              </div>
+              <div class="field">
+                <label for="applyAuthId">認証ID：</label>
+                <input id="applyAuthId" type="text" aria-label="認証ID" />
+              </div>
+              <div class="field">
+                <label for="applyDept">所属：</label>
+                <input id="applyDept" type="text" aria-label="所属" />
+              </div>
+              <div class="field full">
+                <label for="applyReason">申請理由：</label>
+                <textarea id="applyReason" rows="6" aria-label="申請理由"></textarea>
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button class="secondary-btn" id="submitApplication" aria-label="確認">確認</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="view hidden" id="view-settings">
+          <div class="card">
+            <h3>設定</h3>
+            <div class="grid-2">
+              <div class="report-placeholder">通知設定: 内部チャネルのみ</div>
+              <div class="report-placeholder">アクセス監査: 有効</div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </div>
+  </div>
+
+  <div class="modal" id="accessModal" role="dialog" aria-modal="true" aria-labelledby="accessModalTitle">
+    <div class="modal-card">
+      <h4 id="accessModalTitle">アクセス権限がありません</h4>
+      <p id="accessModalMessage">アクセス権限がありません。</p>
+      <p id="accessModalQuestion" class="modal-question">閲覧許可を申請いたしますか</p>
+      <div class="modal-actions" id="accessModalActions">
+        <button class="secondary-btn" id="accessModalNo" aria-label="いいえ">いいえ</button>
+        <button class="primary-btn" id="accessModalYes" aria-label="はい">はい</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="logoutModal" role="dialog" aria-modal="true" aria-labelledby="logoutTitle">
+    <div class="modal-card">
+      <h4 id="logoutTitle">ログアウト確認</h4>
+      <p>ログアウトします。よろしいですか？</p>
+      <div class="modal-actions">
+        <button class="secondary-btn" id="logoutCancel" aria-label="キャンセル">キャンセル</button>
+        <button class="primary-btn" id="logoutConfirm" aria-label="ログアウト">ログアウト</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="downloadModal" role="dialog" aria-modal="true" aria-labelledby="downloadTitle">
+    <div class="modal-card">
+      <h4 id="downloadTitle">ダウンロード注意</h4>
+      <p>ダウンロードファイルはマニュアルに準拠し、適切に保管・廃棄してください</p>
+      <div class="modal-actions">
+        <button class="secondary-btn" id="downloadClose" aria-label="閉じる">閉じる</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="emergencyModal" role="dialog" aria-modal="true" aria-labelledby="emergencyTitle">
+    <div class="modal-card emergency">
+      <h4 id="emergencyTitle">緊急警告</h4>
+      <p class="emergency-text">不正アクセスを検知しました。ログアウトします。</p>
+      <p class="footer-note"><span id="logoutCountdown">5</span>秒後にログイン画面に戻ります。</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
