@@ -18,6 +18,7 @@ const logoutModal = document.getElementById("logoutModal");
 const logoutConfirm = document.getElementById("logoutConfirm");
 const logoutCancel = document.getElementById("logoutCancel");
 const splash = document.getElementById("splash");
+const menuToggle = document.getElementById("menuToggle");
 
 const views = Array.from(document.querySelectorAll(".view"));
 const navLinks = Array.from(document.querySelectorAll(".nav-link"));
@@ -382,6 +383,7 @@ navLinks.forEach((link) => {
     }
 
     switchView(viewId);
+    document.body.classList.remove("mobile-menu-open");
   });
 });
 
@@ -612,4 +614,10 @@ if (backToMembers) {
 if (reportRows.length) {
   const session = getSession();
   renderReportDetail(reportRows[0], session.access);
+}
+
+if (menuToggle) {
+  menuToggle.addEventListener("click", () => {
+    document.body.classList.toggle("mobile-menu-open");
+  });
 }
